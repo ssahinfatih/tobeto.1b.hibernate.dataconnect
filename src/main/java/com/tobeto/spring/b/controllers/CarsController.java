@@ -25,7 +25,7 @@ public class CarsController {
     }
 
     @GetMapping("{id}")
-    public Car getNyId(@PathVariable int id){
+    public Car getById(@PathVariable int id){
         // optional<T> -- ilgili filtreden bbir veri dönmeyebilir
         return carRepository.findById(id).orElseThrow();
     }
