@@ -1,10 +1,19 @@
 package com.tobeto.spring.b.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Table(name="customers")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Customer
 {
@@ -24,8 +33,10 @@ public class Customer
     private String eMail;
 
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     private List<Order> orders;
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     private List<Address> addresses;
 
 

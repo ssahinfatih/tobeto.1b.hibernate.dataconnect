@@ -1,12 +1,17 @@
 package com.tobeto.spring.b.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 //ORM konusu
 @Table(name="cars")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity//tabloyu class haline getiren anotation
 public class Car
 {
@@ -26,6 +31,7 @@ public class Car
     private int kilometer;
 
     @OneToMany(mappedBy = "car")
+    @JsonIgnore
     private List<Order> orders;
 
 
