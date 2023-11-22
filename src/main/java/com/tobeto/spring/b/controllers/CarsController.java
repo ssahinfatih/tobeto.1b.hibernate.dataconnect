@@ -1,6 +1,8 @@
 package com.tobeto.spring.b.controllers;
 
 
+import com.tobeto.spring.b.dtos.requests.car.AddCarRequest;
+import com.tobeto.spring.b.dtos.response.car.GetCarResponse;
 import com.tobeto.spring.b.entities.Car;
 import com.tobeto.spring.b.repositories.CarRepository;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +27,26 @@ public class CarsController {
     }
 
     @GetMapping("{id}")
-    public Car getById(@PathVariable int id){
+    public GetCarResponse getById(@PathVariable int id){
         // optional<T> -- ilgili filtreden bbir veri dönmeyebilir
-        return carRepository.findById(id).orElseThrow();
+        Car car=  carRepository.findById(id).orElseThrow();
+        GetCarResponse dto= new GetCarResponse();
+        dto.setBrand(car.getBrand());
+        dto.setModel(car.getModel());
+        dto.setType(car.getType());
+        return dto;
     }
 
     @PostMapping
-    public void add(@RequestBody Car car){
+    public void add(@RequestBody AddCarRequest addCarRequest){
+        Car car = new Car();
+
+        car.setBrand(addCarRequest.getBrand());
+        car.setModel(addCarRequest.getModel());
+        car.setNumberPlate(addCarRequest.getNumberPlate());
+        car.setType(addCarRequest.getType());
+        car.setKilometer(car.getKilometer());
+
         carRepository.save(car);
     }
 

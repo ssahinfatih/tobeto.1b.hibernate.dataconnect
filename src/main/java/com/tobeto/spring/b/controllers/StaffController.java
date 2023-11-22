@@ -32,11 +32,10 @@ public class StaffController {
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable int id, @RequestBody Order updateOrder) {
+    public void update(@PathVariable int id, @RequestBody Staff staff) {
         Staff staffUpdate = staffRepository.findById(id).orElseThrow();
         staffUpdate.setName(staffUpdate.getName());
         staffUpdate.setSurname(staffUpdate.getSurname());
-
 
         staffRepository.save(staffUpdate);
     }
